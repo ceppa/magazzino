@@ -1,0 +1,154 @@
+#toolbar_container
+{
+	position:fixed;
+	z-index:1;
+	width:100%;
+	height:30px;
+	display:block;
+	top:30px;
+	left:0px;
+	background-color:#fff;
+	border-bottom:1px solid #eee;
+}
+
+div.tDiv /*toolbar*/
+{
+	/* background: #eee url(../img/bg.gif) repeat-x top; */
+	position: relative;			
+	/* border: 1px solid #ccc;*/
+	overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+div.tDiv2
+{
+	float: left;
+	clear: both;
+	padding: 1px;
+}
+
+div.sDiv /*toolbar*/
+{
+	background: #fafafa url(../img/bg.gif) repeat-x top;
+	position: relative;
+	border: 1px solid #ccc;
+	border-top: 0px;
+	overflow: hidden;
+	display: none;
+}
+
+div.sDiv2
+{
+	float: left;
+	clear: both;
+	padding: 5px;
+	padding-left: 5px;
+	width: 1024px;
+}
+
+div.sDiv2 input, div.sDiv2 select
+{
+	vertical-align: middle;
+}
+			
+div.btnseparator
+{
+	float: left;
+	height: 22px;
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #fff;
+	margin: 1px;
+}
+	
+div.fbutton
+{
+	float: left;
+	display: block;
+	cursor: pointer;
+	padding: 1px;
+}
+
+div.fbutton div
+{
+	float: left;
+	padding: 1px 3px;
+}		
+		
+div.fbutton span
+{
+	float: left;
+	display: block;
+	padding: 3px;
+}
+
+div.fbutton:hover, div.fbutton.fbOver
+{
+	padding: 0px;
+	border: 1px solid #ccc;
+}
+
+div.fbutton:hover div, div.fbutton.fbOver div
+{
+	padding: 0px 2px;
+	border-left: 1px solid #fff;
+	border-top: 1px solid #fff;
+	border-right: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+}		
+
+div.fbutton .add
+{
+	background: url(../img/add.png) no-repeat center left;
+}
+
+div.fbutton .delete
+{
+	background: url(../img/close.png) no-repeat center left;
+}
+
+div.fbutton .deactivate
+{
+    background: url(../img/stock_lock-broken.png) no-repeat center left;
+}
+div.fbutton .activate
+{
+	background: url(../img/stock_lock-ok.png) no-repeat center left;
+}
+div.fbutton .expire
+{
+	background: url(../img/tombstone.png) no-repeat center left;
+}
+div.fbutton .edit
+{
+	background: url(../img/stock_edit.png) no-repeat center left;
+}
+div.fbutton .close
+{
+	background: url(../img/stock_close.png) no-repeat center left;
+}
+div.fbutton .apply
+{
+	background: url(../img/stock_calc-accept.png) no-repeat center left;
+}
+div.fbutton .save
+{
+	background: url(../img/stock_save.png) no-repeat center left;
+}
+div.fbutton .details
+{
+	background: url(../img/stock_book_open.png) no-repeat center left;
+}
+div.fbutton .clear
+{
+	background: url(../img/stock_new.png) no-repeat center left;
+}
+div.fbutton .reset
+{
+	background: url(../img/stock_undo.png) no-repeat center left;
+}
+div.fbutton .move
+{
+	background: url(../img/system-switch-user.png) no-repeat center left;
+}
+/* end toolbar*/

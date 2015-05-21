@@ -1,0 +1,168 @@
+.dataTables_wrapper {
+	position: relative;
+	min-height: 302px;
+	* height: 302px;
+	clear: both;
+}
+
+.dataTables_processing {
+	position: absolute;
+	top: 39px;
+	left: 50%;
+	width: 500px;
+	margin-left: -260px;
+	padding: 20px;
+	background-color: #EFFFBD;
+	border: 1px solid #E3FE57;
+	text-align: center;
+}
+
+.dataTables_length {
+	width: 40%;
+	float: left;
+}
+
+.dataTables_filter {
+	width: 50%;
+	float: right;
+	text-align: right;
+}
+
+.dataTables_info {
+	width: 60%;
+	float: left;
+}
+
+.dataTables_paginate {
+	width: 44px;
+	* width: 50px;
+	float: right;
+	text-align: right;
+}
+
+/* Pagination nested */
+.paginate_disabled_previous, .paginate_enabled_previous, .paginate_disabled_next, .paginate_enabled_next {
+	height: 19px;
+	width: 19px;
+	margin-left: 3px;
+	float: left;
+}
+
+.paginate_disabled_previous {
+	background-image: url('../img/back_disabled.jpg');
+}
+
+.paginate_enabled_previous {
+	background-image: url('../img/back_enabled.jpg');
+}
+
+.paginate_disabled_next {
+	background-image: url('../img/forward_disabled.jpg');
+}
+
+.paginate_enabled_next {
+	background-image: url('../img/forward_enabled.jpg');
+}
+
+
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * DataTables display
+ */
+
+#parts_table {
+	margin: 0 auto;
+	width: 100%;
+}
+
+#parts_table thead th {
+	padding: 3px 10px;
+	border-bottom: 1px solid black;
+	font-weight: bold;
+	cursor: pointer;
+	* cursor: hand;
+}
+
+#parts_table tfoot th {
+	padding: 3px 10px;
+	border-top: 1px solid black;
+	font-weight: bold;
+}
+
+#parts_table tr.heading2 td {
+	border-bottom: 1px solid #aaa;
+}
+
+
+#parts_table td {
+	padding: 3px 10px;
+}
+
+
+#parts_table td.center {
+	text-align: center;
+}
+
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * DataTables sorting
+ */
+
+.sorting_asc {
+	background: url('../img/arrow_up.png') no-repeat center right;
+}
+
+.sorting_desc {
+	background: url('../img/arrow_down.png') no-repeat center right;
+}
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * DataTables row classes
+ */
+table.display tr.oddA {
+	background-color: #ddffdd;
+}
+
+table.display tr.evenA {
+	background-color: #eeffee;
+}
+
+table.display tr.oddC {
+	background-color: #ddddff;
+}
+
+table.display tr.evenC {
+	background-color: #eeeeff;
+}
+
+table.display tr.oddX {
+	background-color: #ffdddd;
+}
+
+table.display tr.evenX {
+	background-color: #ffeeee;
+}
+
+table.display tr.oddU {
+	background-color: #ddd;
+}
+
+table.display tr.evenU {
+	background-color: #eee;
+}
+.even {
+    background-color: #ddd;
+}
+
+.odd {
+    background-color: #fff;
+}
+
+.rowSelected {
+    background-color: #FFFF99;
+    border-top:1px solid #000;
+    border-bottom:1px solid #000;
+}

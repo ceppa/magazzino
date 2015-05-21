@@ -1,0 +1,264 @@
+.login_frame
+{
+	text-align:center;
+}
+.frame_title
+{
+	margin-bottom:0px;
+	padding: 3px 10px;
+	background-color:#AAB6BE;
+	border:1px solid #5B6C7A;
+	color:#5B6C7A;
+	font-weight:bold;
+	font-family:sans-serif;
+}
+
+.frame_body
+{
+	padding:10px 10px;
+	border:1px solid #5B6C7A;
+	border-top:none;
+	background-color:#FAFAFA;
+	border-color:#5B6C7A;
+	color:#5B6C7A;
+	font-family:sans-serif;
+}
+
+.button
+{
+	border: 1px solid #5B6C7A;
+	padding: 3px;
+}
+
+.width310px
+{
+	width:310px;
+}
+
+.width270px
+{
+	width:270px;
+}
+
+.leftMenuText
+{
+	vertical-align:middle;
+	text-align:right;
+	padding-right:10px;
+}
+
+.leftMenuImg
+{
+	vertical-align:middle;
+	text-align:center;
+	padding:5px 0px;
+}
+
+#userMenuTable
+{
+	width:100%;
+	margin:0px;
+}
+
+#userForm input[type="text"] 
+{
+	width: 250px;
+	margin:0px;
+}
+
+#userForm table
+{
+	width: 100%;
+}
+
+#userForm td
+{
+	padding:10px 0px;
+	height:50px;
+	margin:0px;
+	vertical-align:middle;
+}
+
+#warehouseForm td
+{
+	padding:10px 0px;
+	height:50px;
+	margin:0px;
+	vertical-align:middle;
+}
+
+.userFormLabel
+{
+	width:100px;
+}
+
+.warehouseFormLabel,
+.partFormLabel,
+.itemFormLabel
+{
+	width:150px;
+}
+
+.warehouseFormTextAreaLabel,
+.partFormTextAreaLabel,
+.itemFormTextAreaLabel
+{
+	vertical-align:top;
+}
+
+textarea
+{
+	border: 1px solid #5B6C7A;
+}
+
+.userFormCheckCell,
+.partFormCheckCell,
+.itemFormCheckCell,
+.warehouseFormCheckCell
+{
+	width:80px;
+	padding:10px 0px;
+	font-size:9px;
+}
+
+#userForm table td[colspan="3"]
+{
+	text-align:center;
+}
+
+#userForm select
+{
+	width:150px;
+}
+
+#warehouseForm table td[colspan="3"]
+{
+	text-align:center;
+}
+
+#warehouseForm select
+{
+	width:150px;
+}
+
+#warehouseForm input[type="text"]
+{
+	width:13em;
+}
+
+
+.threeDigitInput
+{
+	width:3em;
+}
+
+.longTextInput,
+.ac_input
+{
+	width:13em;
+}
+
+input[type="submit"], input[type="reset"], input[type="button"]
+{
+	border:1px solid #5B6C7A;
+	background-color:#FFF;
+	color:#5B6C7A;
+	font-weight:bold;
+	font-family:sans-serif;
+	padding: 3px 10px;
+	width: 49%;
+}
+
+input[type="password"]
+{
+	border:1px solid #5B6C7A;
+	background-color:#FFF;
+}
+
+form
+{
+	padding: 0px;
+	margin: 0px;
+}
+
+td
+{
+	padding:0px;
+	margin:0px;
+}
+
+.close_button
+{
+	vertical-align:middle;
+	float:right;
+	background: url(../img/stock_close.png) no-repeat center left;
+	padding-left: 18px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ac_results {
+	padding: 0px;
+	border: 1px solid WindowFrame;
+	background-color: Window;
+	overflow: hidden;
+}
+
+.ac_results ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.ac_results iframe {
+	display:none;/*sorry for IE5*/
+	display/**/:block;/*sorry for IE5*/
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:-1;
+	filter:mask();
+	width:3000px;
+	height:3000px;
+}
+
+.ac_results li {
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: pointer;
+	display: block;
+	width: 100%;
+	font: menu;
+	font-size: 12px;
+	overflow: hidden;
+}
+.ac_loading {
+	background : url('../img/indicator.gif') right center no-repeat;
+}
+.ac_over {
+	background-color: Highlight;
+	color: HighlightText;
+}
+
+#flexi_container {
+    width:100%;
+}
+
+#tableContainer {
+    width:100%;
+}
+

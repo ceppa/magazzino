@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<link rel="shortcut icon" type="image/ico" href="http://www.sprymedia.co.uk/media/images/favicon.ico" />
+		
+		<title>DataTables example</title>
+		<style type="text/css" title="currentStyle">
+			@import "media/css/demos.css";
+		</style>
+		<script type="text/javascript" language="javascript" src="media//js/jquery.js"></script>
+		<script type="text/javascript" language="javascript" src="media//js/jquery.dataTables.js"></script>
+		<script type="text/javascript" charset="utf-8">
+			/* Global variable for the DataTables object */
+			var oTable;
+			
+			/* Global var for counter */
+			var giCount = 2;
+			
+			$(document).ready(function() {
+				oTable = $('#example').dataTable();
+			} );
+			
+			function fnClickAddRow() {
+				oTable.fnAddData( [
+					giCount+".1",
+					giCount+".2",
+					giCount+".3",
+					giCount+".4" ] );
+				
+				giCount++;
+			}
+		</script>
+	</head>
+	<body>
+		<div id="container">
+			<div class="full_width big">
+				<i>DataTables</i> add row example
+			</div>
+			<p><i>DataTables</i> adding rows in DataTables is done by assigning the DataTables jQuery object to a variable when initialising it, and then using it's API methods to add a new row. Deleting rows can be done in a similar manner.</p>
+			
+			<p><a href="javascript:void(0);" onclick="fnClickAddRow();">Click to add a new row</a></p>
+			
+			<div id="demo">
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="example">
+	<thead>
+		<tr>
+			<th>Column 1</th>
+			<th>Column 2</th>
+			<th>Column 3</th>
+			<th>Column 4</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>1.1</td>
+			<td>1.2</td>
+			<td>1.3</td>
+			<td>1.4</td>
+		</tr>
+	</tbody>
+</table>
+			</div>
+			
+			
+			<div class="space">
+				Initialisation code:
+				<pre>/* Global variable for the DataTables object */
+var oTable;
+
+/* Global var for counter */
+var giCount = 2;
+
+$(document).ready(function() {
+	oTable = $('#example').dataTable();
+} );
+
+function fnClickAddRow() {
+	oTable.fnAddData( [
+		giCount+".1",
+		giCount+".2",
+		giCount+".3",
+		giCount+".4" ] );
+	
+	giCount++;
+}</pre>
+			</div>
+			
+			
+			<div class="space">
+				<i>DataTable</i> examples:<br/>
+				<a href="example_zero_config.html">Zero configuration</a><br>
+				<a href="example_column_render.html">Column rendering</a><br>
+				<a href="example_filter_only.html">Feature enablement</a><br>
+				<a href="example_table_sorting.html">Sorting data</a><br>
+				<a href="example_html_sort.html">Sorting without HTML tags</a><br>
+				<a href="example_multiple_tables.html">Multiple tables</a><br>
+				<a href="example_hidden_columns.html">Hidden columns</a><br>
+				<a href="example_row_callback.html">Row callback</a><br>
+				<a href="example_footer_callback.html">Footer callback</a><br>
+				<a href="example_add_row.html">Dynamically add a new row</a><br>
+				<a href="example_language.html">Change language information (internationalisation)</a><br>
+				<a href="example_language_file.html">Change language information from a file (internationalisation)</a><br>
+				<a href="example_dynamic_creation.html">Dynamically create a table</a>
+				<br>
+				<br>
+				Please refer to the <a href="http://www.sprymedia.co.uk/article/DataTables"><i>DataTables</i> documentation</a> for full information about it's API properties and methods.
+			</div>
+			
+			
+			<div id="footer" style="text-align:center;">
+				<span style="font-size:10px;">&copy; Allan Jardine 2007-2008</span>
+			</div>
+		</div>
+	</body>
+</html>

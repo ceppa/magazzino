@@ -1,0 +1,1773 @@
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='2' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT	parts.id AS parts_id,
+					parts.description AS parts_description,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					subsystems.text AS subsystem,
+					subsystems2.text AS subsystem2,
+					subsystems3.text AS subsystem3,
+					parts.pn_supplier AS parts_pn_supplier,
+					suppliers.name AS suppliers_name, 
+					manufacturers.name AS manufacturers_name,
+					f.location AS fotografia
+			FROM parts 
+			LEFT JOIN places AS suppliers
+				ON suppliers.id = parts.id_suppliers 
+				AND (suppliers.id_places_types=3 OR suppliers.id_places_types=4)
+			LEFT JOIN places AS manufacturers
+				ON manufacturers.id = parts.id_manufacturers 
+				AND (manufacturers.id_places_types=5 OR manufacturers.id_places_types=4) 
+			LEFT JOIN users 
+				ON users.id = parts.id_users_creator 
+			LEFT JOIN subsystems 
+				ON subsystems.id = parts.id_subsystems 
+			LEFT JOIN subsystems AS subsystems2
+				ON subsystems2.id = parts.id_subsystems2
+			LEFT JOIN subsystems AS subsystems3
+				ON subsystems3.id = parts.id_subsystems3
+			LEFT JOIN compatible_parts ON parts.id=compatible_parts.id_parts
+			LEFT JOIN 
+				(
+					SELECT id_compatible,GROUP_CONCAT(DISTINCT location) AS location
+					FROM fotografia
+					GROUP BY id_compatible
+				) f ON f.id_compatible=compatible_parts.id_compatible
+			 WHERE parts.id_simulators='2'  ORDER BY parts.pn_manufacturer asc  LIMIT 0, 15
+
+Array
+(
+    [page] => 1
+    [rp] => 15
+    [sortname] => parts.pn_manufacturer
+    [sortorder] => asc
+    [query] => 
+    [qtype] => subsystem
+    [func] => list
+)
+
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='2' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT	parts.id AS parts_id,
+					parts.description AS parts_description,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					subsystems.text AS subsystem,
+					subsystems2.text AS subsystem2,
+					subsystems3.text AS subsystem3,
+					parts.pn_supplier AS parts_pn_supplier,
+					suppliers.name AS suppliers_name, 
+					manufacturers.name AS manufacturers_name,
+					f.location AS fotografia
+			FROM parts 
+			LEFT JOIN places AS suppliers
+				ON suppliers.id = parts.id_suppliers 
+				AND (suppliers.id_places_types=3 OR suppliers.id_places_types=4)
+			LEFT JOIN places AS manufacturers
+				ON manufacturers.id = parts.id_manufacturers 
+				AND (manufacturers.id_places_types=5 OR manufacturers.id_places_types=4) 
+			LEFT JOIN users 
+				ON users.id = parts.id_users_creator 
+			LEFT JOIN subsystems 
+				ON subsystems.id = parts.id_subsystems 
+			LEFT JOIN subsystems AS subsystems2
+				ON subsystems2.id = parts.id_subsystems2
+			LEFT JOIN subsystems AS subsystems3
+				ON subsystems3.id = parts.id_subsystems3
+			LEFT JOIN compatible_parts ON parts.id=compatible_parts.id_parts
+			LEFT JOIN 
+				(
+					SELECT id_compatible,GROUP_CONCAT(DISTINCT location) AS location
+					FROM fotografia
+					GROUP BY id_compatible
+				) f ON f.id_compatible=compatible_parts.id_compatible
+			 WHERE parts.id_simulators='1'  ORDER BY parts.pn_manufacturer asc  LIMIT 0, 15
+
+Array
+(
+    [page] => 1
+    [rp] => 15
+    [sortname] => parts.pn_manufacturer
+    [sortorder] => asc
+    [query] => 
+    [qtype] => subsystem
+    [func] => list
+)
+
+
+
+
+SELECT movements.id AS id,
+				GROUP_CONCAT(DISTINCT CONCAT(documents.id,'§',documents.description) 
+					ORDER BY documents.description SEPARATOR '§') AS documents 
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN movements_documents ON movements.id = movements_documents.id_movements 
+			LEFT JOIN documents ON movements_documents.id_documents = documents.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id 
+			 WHERE movements.id_simulators='1' AND movements.insert_date LIKE '%%'  GROUP BY movements.id
+			ORDER BY movements.insert_date desc,movements.id  LIMIT 0,15
+
+SELECT movements.id AS id,
+				parts.pn_supplier AS pn,
+				parts.description AS description,
+				items.sn AS sn,
+				count(items.id) AS qty
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			 WHERE movements.id in (7876,7875,7874,7873,7872,7871,7870,7869,7868,7867,7860,7858,7857,7856,7854)
+			GROUP BY movements.id,parts.pn_supplier,items.sn
+
+SELECT movements.id AS movements_id,
+				movements.insert_date AS insert_date,
+				places_from.name AS fromText,
+				places_to.name AS toText,
+				movements.note AS note,
+				users.username AS username
+			FROM movements 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id
+			 WHERE movements.id in (7876,7875,7874,7873,7872,7871,7870,7869,7868,7867,7860,7858,7857,7856,7854) ORDER BY movements.insert_date desc,movements.id
+
+
+
+SELECT	users.id AS userid,
+					users.username AS username,
+					users.name AS name,
+					users.surname AS surname,
+					users.email AS email,
+					users.active AS active,
+					users.expired AS expired,
+					users_types.name AS usertype
+			FROM users 
+				LEFT JOIN users_types 
+				ON users_types.id = users.id_users_types 
+			 WHERE users.id_simulators='1'  ORDER BY username asc  LIMIT 0, 15
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT movements.id AS id,
+				GROUP_CONCAT(DISTINCT CONCAT(documents.id,'§',documents.description) 
+					ORDER BY documents.description SEPARATOR '§') AS documents 
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN movements_documents ON movements.id = movements_documents.id_movements 
+			LEFT JOIN documents ON movements_documents.id_documents = documents.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id 
+			 WHERE movements.id_simulators='1' AND movements.insert_date LIKE '%%'  GROUP BY movements.id
+			ORDER BY movements.insert_date desc,movements.id  LIMIT 0,15
+
+SELECT movements.id AS id,
+				parts.pn_supplier AS pn,
+				parts.description AS description,
+				items.sn AS sn,
+				count(items.id) AS qty
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			 WHERE movements.id in (7876,7875,7874,7873,7872,7871,7870,7869,7868,7867,7860,7858,7857,7856,7854)
+			GROUP BY movements.id,parts.pn_supplier,items.sn
+
+SELECT movements.id AS movements_id,
+				movements.insert_date AS insert_date,
+				places_from.name AS fromText,
+				places_to.name AS toText,
+				movements.note AS note,
+				users.username AS username
+			FROM movements 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id
+			 WHERE movements.id in (7876,7875,7874,7873,7872,7871,7870,7869,7868,7867,7860,7858,7857,7856,7854) ORDER BY movements.insert_date desc,movements.id
+
+
+
+SELECT	parts.id AS parts_id,
+					parts.description AS parts_description,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					subsystems.text AS subsystem,
+					subsystems2.text AS subsystem2,
+					subsystems3.text AS subsystem3,
+					parts.pn_supplier AS parts_pn_supplier,
+					suppliers.name AS suppliers_name, 
+					manufacturers.name AS manufacturers_name,
+					f.location AS fotografia
+			FROM parts 
+			LEFT JOIN places AS suppliers
+				ON suppliers.id = parts.id_suppliers 
+				AND (suppliers.id_places_types=3 OR suppliers.id_places_types=4)
+			LEFT JOIN places AS manufacturers
+				ON manufacturers.id = parts.id_manufacturers 
+				AND (manufacturers.id_places_types=5 OR manufacturers.id_places_types=4) 
+			LEFT JOIN users 
+				ON users.id = parts.id_users_creator 
+			LEFT JOIN subsystems 
+				ON subsystems.id = parts.id_subsystems 
+			LEFT JOIN subsystems AS subsystems2
+				ON subsystems2.id = parts.id_subsystems2
+			LEFT JOIN subsystems AS subsystems3
+				ON subsystems3.id = parts.id_subsystems3
+			LEFT JOIN compatible_parts ON parts.id=compatible_parts.id_parts
+			LEFT JOIN 
+				(
+					SELECT id_compatible,GROUP_CONCAT(DISTINCT location) AS location
+					FROM fotografia
+					GROUP BY id_compatible
+				) f ON f.id_compatible=compatible_parts.id_compatible
+			 WHERE parts.id_simulators='1'  ORDER BY parts.pn_manufacturer asc  LIMIT 0, 15
+
+Array
+(
+    [page] => 1
+    [rp] => 15
+    [sortname] => parts.pn_manufacturer
+    [sortorder] => asc
+    [query] => 
+    [qtype] => subsystem
+    [func] => list
+)
+
+
+
+
+SELECT	parts.id AS parts_id,
+					parts.description AS parts_description,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					subsystems.text AS subsystem,
+					subsystems2.text AS subsystem2,
+					subsystems3.text AS subsystem3,
+					parts.pn_supplier AS parts_pn_supplier,
+					suppliers.name AS suppliers_name, 
+					manufacturers.name AS manufacturers_name,
+					f.location AS fotografia
+			FROM parts 
+			LEFT JOIN places AS suppliers
+				ON suppliers.id = parts.id_suppliers 
+				AND (suppliers.id_places_types=3 OR suppliers.id_places_types=4)
+			LEFT JOIN places AS manufacturers
+				ON manufacturers.id = parts.id_manufacturers 
+				AND (manufacturers.id_places_types=5 OR manufacturers.id_places_types=4) 
+			LEFT JOIN users 
+				ON users.id = parts.id_users_creator 
+			LEFT JOIN subsystems 
+				ON subsystems.id = parts.id_subsystems 
+			LEFT JOIN subsystems AS subsystems2
+				ON subsystems2.id = parts.id_subsystems2
+			LEFT JOIN subsystems AS subsystems3
+				ON subsystems3.id = parts.id_subsystems3
+			LEFT JOIN compatible_parts ON parts.id=compatible_parts.id_parts
+			LEFT JOIN 
+				(
+					SELECT id_compatible,GROUP_CONCAT(DISTINCT location) AS location
+					FROM fotografia
+					GROUP BY id_compatible
+				) f ON f.id_compatible=compatible_parts.id_compatible
+			 WHERE parts.id_simulators='1'  ORDER BY parts.pn_manufacturer asc  LIMIT 0, 15
+
+Array
+(
+    [page] => 1
+    [rp] => 15
+    [sortname] => parts.pn_manufacturer
+    [sortorder] => asc
+    [query] => 
+    [qtype] => subsystem
+    [func] => list
+)
+
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT	parts.id AS parts_id,
+					parts.description AS parts_description,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					subsystems.text AS subsystem,
+					subsystems2.text AS subsystem2,
+					subsystems3.text AS subsystem3,
+					parts.pn_supplier AS parts_pn_supplier,
+					suppliers.name AS suppliers_name, 
+					manufacturers.name AS manufacturers_name,
+					f.location AS fotografia
+			FROM parts 
+			LEFT JOIN places AS suppliers
+				ON suppliers.id = parts.id_suppliers 
+				AND (suppliers.id_places_types=3 OR suppliers.id_places_types=4)
+			LEFT JOIN places AS manufacturers
+				ON manufacturers.id = parts.id_manufacturers 
+				AND (manufacturers.id_places_types=5 OR manufacturers.id_places_types=4) 
+			LEFT JOIN users 
+				ON users.id = parts.id_users_creator 
+			LEFT JOIN subsystems 
+				ON subsystems.id = parts.id_subsystems 
+			LEFT JOIN subsystems AS subsystems2
+				ON subsystems2.id = parts.id_subsystems2
+			LEFT JOIN subsystems AS subsystems3
+				ON subsystems3.id = parts.id_subsystems3
+			LEFT JOIN compatible_parts ON parts.id=compatible_parts.id_parts
+			LEFT JOIN 
+				(
+					SELECT id_compatible,GROUP_CONCAT(DISTINCT location) AS location
+					FROM fotografia
+					GROUP BY id_compatible
+				) f ON f.id_compatible=compatible_parts.id_compatible
+			 WHERE parts.id_simulators='1'  ORDER BY parts.pn_manufacturer asc  LIMIT 0, 15
+
+Array
+(
+    [page] => 1
+    [rp] => 15
+    [sortname] => parts.pn_manufacturer
+    [sortorder] => asc
+    [query] => 
+    [qtype] => subsystem
+    [func] => list
+)
+
+
+
+
+SELECT	parts.id AS parts_id,
+					parts.description AS parts_description,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					subsystems.text AS subsystem,
+					subsystems2.text AS subsystem2,
+					subsystems3.text AS subsystem3,
+					parts.pn_supplier AS parts_pn_supplier,
+					suppliers.name AS suppliers_name, 
+					manufacturers.name AS manufacturers_name,
+					f.location AS fotografia
+			FROM parts 
+			LEFT JOIN places AS suppliers
+				ON suppliers.id = parts.id_suppliers 
+				AND (suppliers.id_places_types=3 OR suppliers.id_places_types=4)
+			LEFT JOIN places AS manufacturers
+				ON manufacturers.id = parts.id_manufacturers 
+				AND (manufacturers.id_places_types=5 OR manufacturers.id_places_types=4) 
+			LEFT JOIN users 
+				ON users.id = parts.id_users_creator 
+			LEFT JOIN subsystems 
+				ON subsystems.id = parts.id_subsystems 
+			LEFT JOIN subsystems AS subsystems2
+				ON subsystems2.id = parts.id_subsystems2
+			LEFT JOIN subsystems AS subsystems3
+				ON subsystems3.id = parts.id_subsystems3
+			LEFT JOIN compatible_parts ON parts.id=compatible_parts.id_parts
+			LEFT JOIN 
+				(
+					SELECT id_compatible,GROUP_CONCAT(DISTINCT location) AS location
+					FROM fotografia
+					GROUP BY id_compatible
+				) f ON f.id_compatible=compatible_parts.id_compatible
+			 WHERE parts.id_simulators='1'  ORDER BY parts.pn_manufacturer asc  LIMIT 0, 15
+
+Array
+(
+    [page] => 1
+    [rp] => 15
+    [sortname] => parts.pn_manufacturer
+    [sortorder] => asc
+    [query] => 
+    [qtype] => subsystem
+    [func] => list
+)
+
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT	parts.id AS parts_id,
+					parts.description AS parts_description,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					subsystems.text AS subsystem,
+					subsystems2.text AS subsystem2,
+					subsystems3.text AS subsystem3,
+					parts.pn_supplier AS parts_pn_supplier,
+					suppliers.name AS suppliers_name, 
+					manufacturers.name AS manufacturers_name,
+					f.location AS fotografia
+			FROM parts 
+			LEFT JOIN places AS suppliers
+				ON suppliers.id = parts.id_suppliers 
+				AND (suppliers.id_places_types=3 OR suppliers.id_places_types=4)
+			LEFT JOIN places AS manufacturers
+				ON manufacturers.id = parts.id_manufacturers 
+				AND (manufacturers.id_places_types=5 OR manufacturers.id_places_types=4) 
+			LEFT JOIN users 
+				ON users.id = parts.id_users_creator 
+			LEFT JOIN subsystems 
+				ON subsystems.id = parts.id_subsystems 
+			LEFT JOIN subsystems AS subsystems2
+				ON subsystems2.id = parts.id_subsystems2
+			LEFT JOIN subsystems AS subsystems3
+				ON subsystems3.id = parts.id_subsystems3
+			LEFT JOIN compatible_parts ON parts.id=compatible_parts.id_parts
+			LEFT JOIN 
+				(
+					SELECT id_compatible,GROUP_CONCAT(DISTINCT location) AS location
+					FROM fotografia
+					GROUP BY id_compatible
+				) f ON f.id_compatible=compatible_parts.id_compatible
+			 WHERE parts.id_simulators='1'  ORDER BY parts.pn_manufacturer asc  LIMIT 0, 15
+
+Array
+(
+    [page] => 1
+    [rp] => 15
+    [sortname] => parts.pn_manufacturer
+    [sortorder] => asc
+    [query] => 
+    [qtype] => subsystem
+    [func] => list
+)
+
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT	parts.id AS parts_id,
+					parts.description AS parts_description,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					subsystems.text AS subsystem,
+					subsystems2.text AS subsystem2,
+					subsystems3.text AS subsystem3,
+					parts.pn_supplier AS parts_pn_supplier,
+					suppliers.name AS suppliers_name, 
+					manufacturers.name AS manufacturers_name,
+					f.location AS fotografia
+			FROM parts 
+			LEFT JOIN places AS suppliers
+				ON suppliers.id = parts.id_suppliers 
+				AND (suppliers.id_places_types=3 OR suppliers.id_places_types=4)
+			LEFT JOIN places AS manufacturers
+				ON manufacturers.id = parts.id_manufacturers 
+				AND (manufacturers.id_places_types=5 OR manufacturers.id_places_types=4) 
+			LEFT JOIN users 
+				ON users.id = parts.id_users_creator 
+			LEFT JOIN subsystems 
+				ON subsystems.id = parts.id_subsystems 
+			LEFT JOIN subsystems AS subsystems2
+				ON subsystems2.id = parts.id_subsystems2
+			LEFT JOIN subsystems AS subsystems3
+				ON subsystems3.id = parts.id_subsystems3
+			LEFT JOIN compatible_parts ON parts.id=compatible_parts.id_parts
+			LEFT JOIN 
+				(
+					SELECT id_compatible,GROUP_CONCAT(DISTINCT location) AS location
+					FROM fotografia
+					GROUP BY id_compatible
+				) f ON f.id_compatible=compatible_parts.id_compatible
+			 WHERE parts.id_simulators='1'  ORDER BY parts.pn_manufacturer asc  LIMIT 0, 15
+
+Array
+(
+    [page] => 1
+    [rp] => 15
+    [sortname] => parts.pn_manufacturer
+    [sortorder] => asc
+    [query] => 
+    [qtype] => subsystem
+    [func] => list
+)
+
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT	parts.id AS parts_id,
+					parts.description AS parts_description,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					subsystems.text AS subsystem,
+					subsystems2.text AS subsystem2,
+					subsystems3.text AS subsystem3,
+					parts.pn_supplier AS parts_pn_supplier,
+					suppliers.name AS suppliers_name, 
+					manufacturers.name AS manufacturers_name,
+					f.location AS fotografia
+			FROM parts 
+			LEFT JOIN places AS suppliers
+				ON suppliers.id = parts.id_suppliers 
+				AND (suppliers.id_places_types=3 OR suppliers.id_places_types=4)
+			LEFT JOIN places AS manufacturers
+				ON manufacturers.id = parts.id_manufacturers 
+				AND (manufacturers.id_places_types=5 OR manufacturers.id_places_types=4) 
+			LEFT JOIN users 
+				ON users.id = parts.id_users_creator 
+			LEFT JOIN subsystems 
+				ON subsystems.id = parts.id_subsystems 
+			LEFT JOIN subsystems AS subsystems2
+				ON subsystems2.id = parts.id_subsystems2
+			LEFT JOIN subsystems AS subsystems3
+				ON subsystems3.id = parts.id_subsystems3
+			LEFT JOIN compatible_parts ON parts.id=compatible_parts.id_parts
+			LEFT JOIN 
+				(
+					SELECT id_compatible,GROUP_CONCAT(DISTINCT location) AS location
+					FROM fotografia
+					GROUP BY id_compatible
+				) f ON f.id_compatible=compatible_parts.id_compatible
+			 WHERE parts.id_simulators='1'  ORDER BY parts.pn_manufacturer asc  LIMIT 0, 15
+
+Array
+(
+    [page] => 1
+    [rp] => 15
+    [sortname] => parts.pn_manufacturer
+    [sortorder] => asc
+    [query] => 
+    [qtype] => subsystem
+    [func] => list
+)
+
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT	parts.id AS parts_id,
+					parts.description AS parts_description,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					subsystems.text AS subsystem,
+					subsystems2.text AS subsystem2,
+					subsystems3.text AS subsystem3,
+					parts.pn_supplier AS parts_pn_supplier,
+					suppliers.name AS suppliers_name, 
+					manufacturers.name AS manufacturers_name,
+					f.location AS fotografia
+			FROM parts 
+			LEFT JOIN places AS suppliers
+				ON suppliers.id = parts.id_suppliers 
+				AND (suppliers.id_places_types=3 OR suppliers.id_places_types=4)
+			LEFT JOIN places AS manufacturers
+				ON manufacturers.id = parts.id_manufacturers 
+				AND (manufacturers.id_places_types=5 OR manufacturers.id_places_types=4) 
+			LEFT JOIN users 
+				ON users.id = parts.id_users_creator 
+			LEFT JOIN subsystems 
+				ON subsystems.id = parts.id_subsystems 
+			LEFT JOIN subsystems AS subsystems2
+				ON subsystems2.id = parts.id_subsystems2
+			LEFT JOIN subsystems AS subsystems3
+				ON subsystems3.id = parts.id_subsystems3
+			LEFT JOIN compatible_parts ON parts.id=compatible_parts.id_parts
+			LEFT JOIN 
+				(
+					SELECT id_compatible,GROUP_CONCAT(DISTINCT location) AS location
+					FROM fotografia
+					GROUP BY id_compatible
+				) f ON f.id_compatible=compatible_parts.id_compatible
+			 WHERE parts.id_simulators='1'  ORDER BY parts.pn_manufacturer asc  LIMIT 0, 15
+
+Array
+(
+    [page] => 1
+    [rp] => 15
+    [sortname] => parts.pn_manufacturer
+    [sortorder] => asc
+    [query] => 
+    [qtype] => subsystem
+    [func] => list
+)
+
+
+
+
+SELECT	parts.id AS parts_id,
+					parts.description AS parts_description,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					subsystems.text AS subsystem,
+					subsystems2.text AS subsystem2,
+					subsystems3.text AS subsystem3,
+					parts.pn_supplier AS parts_pn_supplier,
+					suppliers.name AS suppliers_name, 
+					manufacturers.name AS manufacturers_name,
+					f.location AS fotografia
+			FROM parts 
+			LEFT JOIN places AS suppliers
+				ON suppliers.id = parts.id_suppliers 
+				AND (suppliers.id_places_types=3 OR suppliers.id_places_types=4)
+			LEFT JOIN places AS manufacturers
+				ON manufacturers.id = parts.id_manufacturers 
+				AND (manufacturers.id_places_types=5 OR manufacturers.id_places_types=4) 
+			LEFT JOIN users 
+				ON users.id = parts.id_users_creator 
+			LEFT JOIN subsystems 
+				ON subsystems.id = parts.id_subsystems 
+			LEFT JOIN subsystems AS subsystems2
+				ON subsystems2.id = parts.id_subsystems2
+			LEFT JOIN subsystems AS subsystems3
+				ON subsystems3.id = parts.id_subsystems3
+			LEFT JOIN compatible_parts ON parts.id=compatible_parts.id_parts
+			LEFT JOIN 
+				(
+					SELECT id_compatible,GROUP_CONCAT(DISTINCT location) AS location
+					FROM fotografia
+					GROUP BY id_compatible
+				) f ON f.id_compatible=compatible_parts.id_compatible
+			 WHERE parts.id_simulators='1' AND (parts.description LIKE '%lens%') ORDER BY parts.pn_manufacturer asc  LIMIT 0, 15
+
+Array
+(
+    [page] => 1
+    [rp] => 15
+    [sortname] => parts.pn_manufacturer
+    [sortorder] => asc
+    [query] => lens
+    [qtype] => parts.description
+    [func] => list
+)
+
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE (parts.pn_manufacturer LIKE '%12%' 
+				OR parts.pn_supplier LIKE '%12%')  AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT movements.id AS id,
+				GROUP_CONCAT(DISTINCT CONCAT(documents.id,'§',documents.description) 
+					ORDER BY documents.description SEPARATOR '§') AS documents 
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN movements_documents ON movements.id = movements_documents.id_movements 
+			LEFT JOIN documents ON movements_documents.id_documents = documents.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id 
+			 WHERE movements.id_simulators='1' AND movements.insert_date LIKE '%%'  GROUP BY movements.id
+			ORDER BY movements.insert_date desc,movements.id  LIMIT 0,15
+
+SELECT movements.id AS id,
+				parts.pn_supplier AS pn,
+				parts.description AS description,
+				items.sn AS sn,
+				count(items.id) AS qty
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			 WHERE movements.id in (7876,7875,7874,7873,7872,7871,7870,7869,7868,7867,7860,7858,7857,7856,7854)
+			GROUP BY movements.id,parts.pn_supplier,items.sn
+
+SELECT movements.id AS movements_id,
+				movements.insert_date AS insert_date,
+				places_from.name AS fromText,
+				places_to.name AS toText,
+				movements.note AS note,
+				users.username AS username
+			FROM movements 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id
+			 WHERE movements.id in (7876,7875,7874,7873,7872,7871,7870,7869,7868,7867,7860,7858,7857,7856,7854) ORDER BY movements.insert_date desc,movements.id
+
+
+
+SELECT movements.id AS id,
+				GROUP_CONCAT(DISTINCT CONCAT(documents.id,'§',documents.description) 
+					ORDER BY documents.description SEPARATOR '§') AS documents 
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN movements_documents ON movements.id = movements_documents.id_movements 
+			LEFT JOIN documents ON movements_documents.id_documents = documents.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id 
+			 WHERE movements.id_simulators='1' AND movements.insert_date LIKE '%%'  GROUP BY movements.id
+			ORDER BY movements.insert_date desc,movements.id  LIMIT 0,15
+
+SELECT movements.id AS id,
+				parts.pn_supplier AS pn,
+				parts.description AS description,
+				items.sn AS sn,
+				count(items.id) AS qty
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			 WHERE movements.id in (7876,7875,7874,7873,7872,7871,7870,7869,7868,7867,7860,7858,7857,7856,7854)
+			GROUP BY movements.id,parts.pn_supplier,items.sn
+
+SELECT movements.id AS movements_id,
+				movements.insert_date AS insert_date,
+				places_from.name AS fromText,
+				places_to.name AS toText,
+				movements.note AS note,
+				users.username AS username
+			FROM movements 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id
+			 WHERE movements.id in (7876,7875,7874,7873,7872,7871,7870,7869,7868,7867,7860,7858,7857,7856,7854) ORDER BY movements.insert_date desc,movements.id
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT movements.id AS id,
+				GROUP_CONCAT(DISTINCT CONCAT(documents.id,'§',documents.description) 
+					ORDER BY documents.description SEPARATOR '§') AS documents 
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN movements_documents ON movements.id = movements_documents.id_movements 
+			LEFT JOIN documents ON movements_documents.id_documents = documents.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id 
+			 WHERE movements.id_simulators='1' AND movements.insert_date LIKE '%%'  GROUP BY movements.id
+			ORDER BY movements.insert_date desc,movements.id  LIMIT 0,15
+
+SELECT movements.id AS id,
+				parts.pn_supplier AS pn,
+				parts.description AS description,
+				items.sn AS sn,
+				count(items.id) AS qty
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			 WHERE movements.id in (7876,7875,7874,7873,7872,7871,7870,7869,7868,7867,7860,7858,7857,7856,7854)
+			GROUP BY movements.id,parts.pn_supplier,items.sn
+
+SELECT movements.id AS movements_id,
+				movements.insert_date AS insert_date,
+				places_from.name AS fromText,
+				places_to.name AS toText,
+				movements.note AS note,
+				users.username AS username
+			FROM movements 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id
+			 WHERE movements.id in (7876,7875,7874,7873,7872,7871,7870,7869,7868,7867,7860,7858,7857,7856,7854) ORDER BY movements.insert_date desc,movements.id
+
+
+
+SELECT movements.id AS id,
+				GROUP_CONCAT(DISTINCT CONCAT(documents.id,'§',documents.description) 
+					ORDER BY documents.description SEPARATOR '§') AS documents 
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN movements_documents ON movements.id = movements_documents.id_movements 
+			LEFT JOIN documents ON movements_documents.id_documents = documents.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id 
+			 WHERE movements.id_simulators='1' AND movements.insert_date LIKE '%%'  GROUP BY movements.id
+			ORDER BY movements.insert_date desc,movements.id  LIMIT 0,15
+
+SELECT movements.id AS id,
+				parts.pn_supplier AS pn,
+				parts.description AS description,
+				items.sn AS sn,
+				count(items.id) AS qty
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			 WHERE movements.id in (7876,7875,7874,7873,7872,7871,7870,7869,7868,7867,7860,7858,7857,7856,7854)
+			GROUP BY movements.id,parts.pn_supplier,items.sn
+
+SELECT movements.id AS movements_id,
+				movements.insert_date AS insert_date,
+				places_from.name AS fromText,
+				places_to.name AS toText,
+				movements.note AS note,
+				users.username AS username
+			FROM movements 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id
+			 WHERE movements.id in (7876,7875,7874,7873,7872,7871,7870,7869,7868,7867,7860,7858,7857,7856,7854) ORDER BY movements.insert_date desc,movements.id
+
+
+
+SELECT movements.id AS id,
+				GROUP_CONCAT(DISTINCT CONCAT(documents.id,'§',documents.description) 
+					ORDER BY documents.description SEPARATOR '§') AS documents 
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN movements_documents ON movements.id = movements_documents.id_movements 
+			LEFT JOIN documents ON movements_documents.id_documents = documents.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id 
+			 WHERE movements.id_simulators='1' AND movements.insert_date LIKE '%%'  GROUP BY movements.id
+			ORDER BY movements.insert_date desc,movements.id  LIMIT 0,15
+
+SELECT movements.id AS id,
+				parts.pn_supplier AS pn,
+				parts.description AS description,
+				items.sn AS sn,
+				count(items.id) AS qty
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			 WHERE movements.id in (7876,7875,7874,7873,7872,7871,7870,7869,7868,7867,7860,7858,7857,7856,7854)
+			GROUP BY movements.id,parts.pn_supplier,items.sn
+
+SELECT movements.id AS movements_id,
+				movements.insert_date AS insert_date,
+				places_from.name AS fromText,
+				places_to.name AS toText,
+				movements.note AS note,
+				users.username AS username
+			FROM movements 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id
+			 WHERE movements.id in (7876,7875,7874,7873,7872,7871,7870,7869,7868,7867,7860,7858,7857,7856,7854) ORDER BY movements.insert_date desc,movements.id
+
+
+
+SELECT movements.id AS id,
+				GROUP_CONCAT(DISTINCT CONCAT(documents.id,'§',documents.description) 
+					ORDER BY documents.description SEPARATOR '§') AS documents 
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN movements_documents ON movements.id = movements_documents.id_movements 
+			LEFT JOIN documents ON movements_documents.id_documents = documents.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id 
+			 WHERE movements.id_simulators='1' AND movements.insert_date LIKE '%%'  GROUP BY movements.id
+			ORDER BY movements.insert_date desc,movements.id  LIMIT 0,15
+
+SELECT movements.id AS id,
+				parts.pn_supplier AS pn,
+				parts.description AS description,
+				items.sn AS sn,
+				count(items.id) AS qty
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			 WHERE movements.id in (7876,7875,7874,7873,7872,7871,7870,7869,7868,7867,7860,7858,7857,7856,7854)
+			GROUP BY movements.id,parts.pn_supplier,items.sn
+
+SELECT movements.id AS movements_id,
+				movements.insert_date AS insert_date,
+				places_from.name AS fromText,
+				places_to.name AS toText,
+				movements.note AS note,
+				users.username AS username
+			FROM movements 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id
+			 WHERE movements.id in (7876,7875,7874,7873,7872,7871,7870,7869,7868,7867,7860,7858,7857,7856,7854) ORDER BY movements.insert_date desc,movements.id
+
+
+
+SELECT	users.id AS userid,
+					users.username AS username,
+					users.name AS name,
+					users.surname AS surname,
+					users.email AS email,
+					users.active AS active,
+					users.expired AS expired,
+					users_types.name AS usertype
+			FROM users 
+				LEFT JOIN users_types 
+				ON users_types.id = users.id_users_types 
+			 WHERE users.id_simulators='1'  ORDER BY username asc  LIMIT 0, 15
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT	users.id AS userid,
+					users.username AS username,
+					users.name AS name,
+					users.surname AS surname,
+					users.email AS email,
+					users.active AS active,
+					users.expired AS expired,
+					users_types.name AS usertype
+			FROM users 
+				LEFT JOIN users_types 
+				ON users_types.id = users.id_users_types 
+			 WHERE users.id_simulators='1'  ORDER BY username asc  LIMIT 0, 15
+
+
+
+SELECT	users.id AS userid,
+					users.username AS username,
+					users.name AS name,
+					users.surname AS surname,
+					users.email AS email,
+					users.active AS active,
+					users.expired AS expired,
+					users_types.name AS usertype
+			FROM users 
+				LEFT JOIN users_types 
+				ON users_types.id = users.id_users_types 
+			 WHERE users.id_simulators='1'  AND username LIKE '%x%'  ORDER BY username asc  LIMIT 0, 15
+
+
+
+SELECT movements.id AS id,
+				GROUP_CONCAT(DISTINCT CONCAT(documents.id,'§',documents.description) 
+					ORDER BY documents.description SEPARATOR '§') AS documents 
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN movements_documents ON movements.id = movements_documents.id_movements 
+			LEFT JOIN documents ON movements_documents.id_documents = documents.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id 
+			 WHERE movements.id_simulators='1' AND movements.insert_date LIKE '%%'  GROUP BY movements.id
+			ORDER BY movements.insert_date desc,movements.id  LIMIT 0,15
+
+SELECT movements.id AS id,
+				parts.pn_supplier AS pn,
+				parts.description AS description,
+				items.sn AS sn,
+				count(items.id) AS qty
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			 WHERE movements.id in (7876,7875,7874,7873,7872,7871,7870,7869,7868,7867,7860,7858,7857,7856,7854)
+			GROUP BY movements.id,parts.pn_supplier,items.sn
+
+SELECT movements.id AS movements_id,
+				movements.insert_date AS insert_date,
+				places_from.name AS fromText,
+				places_to.name AS toText,
+				movements.note AS note,
+				users.username AS username
+			FROM movements 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id
+			 WHERE movements.id in (7876,7875,7874,7873,7872,7871,7870,7869,7868,7867,7860,7858,7857,7856,7854) ORDER BY movements.insert_date desc,movements.id
+
+
+
+SELECT movements.id AS id,
+				GROUP_CONCAT(DISTINCT CONCAT(documents.id,'§',documents.description) 
+					ORDER BY documents.description SEPARATOR '§') AS documents 
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN movements_documents ON movements.id = movements_documents.id_movements 
+			LEFT JOIN documents ON movements_documents.id_documents = documents.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id 
+			 WHERE movements.id_simulators='1' AND movements.insert_date LIKE '%ß%'  GROUP BY movements.id
+			ORDER BY movements.insert_date desc,movements.id  LIMIT 0,15
+
+SELECT movements.id AS id,
+				parts.pn_supplier AS pn,
+				parts.description AS description,
+				items.sn AS sn,
+				count(items.id) AS qty
+			FROM movements 
+			LEFT JOIN movements_items ON movements.id = movements_items.id_movements 
+			LEFT JOIN items ON movements_items.id_items = items.id 
+			LEFT JOIN parts ON items.id_parts = parts.id 
+			 WHERE movements.id in ('')
+			GROUP BY movements.id,parts.pn_supplier,items.sn
+
+SELECT movements.id AS movements_id,
+				movements.insert_date AS insert_date,
+				places_from.name AS fromText,
+				places_to.name AS toText,
+				movements.note AS note,
+				users.username AS username
+			FROM movements 
+			LEFT JOIN places places_from ON movements.id_places_from = places_from.id 
+			LEFT JOIN places places_to ON movements.id_places_to = places_to.id 
+			LEFT JOIN users ON movements.id_users = users.id
+			 WHERE movements.id in ('') ORDER BY movements.insert_date desc,movements.id
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE places.name LIKE '%ß%'  AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT	parts.id AS parts_id,
+					parts.description AS parts_description,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					subsystems.text AS subsystem,
+					subsystems2.text AS subsystem2,
+					subsystems3.text AS subsystem3,
+					parts.pn_supplier AS parts_pn_supplier,
+					suppliers.name AS suppliers_name, 
+					manufacturers.name AS manufacturers_name,
+					f.location AS fotografia
+			FROM parts 
+			LEFT JOIN places AS suppliers
+				ON suppliers.id = parts.id_suppliers 
+				AND (suppliers.id_places_types=3 OR suppliers.id_places_types=4)
+			LEFT JOIN places AS manufacturers
+				ON manufacturers.id = parts.id_manufacturers 
+				AND (manufacturers.id_places_types=5 OR manufacturers.id_places_types=4) 
+			LEFT JOIN users 
+				ON users.id = parts.id_users_creator 
+			LEFT JOIN subsystems 
+				ON subsystems.id = parts.id_subsystems 
+			LEFT JOIN subsystems AS subsystems2
+				ON subsystems2.id = parts.id_subsystems2
+			LEFT JOIN subsystems AS subsystems3
+				ON subsystems3.id = parts.id_subsystems3
+			LEFT JOIN compatible_parts ON parts.id=compatible_parts.id_parts
+			LEFT JOIN 
+				(
+					SELECT id_compatible,GROUP_CONCAT(DISTINCT location) AS location
+					FROM fotografia
+					GROUP BY id_compatible
+				) f ON f.id_compatible=compatible_parts.id_compatible
+			 WHERE parts.id_simulators='1' AND (subsystems.text LIKE '%ß%') ORDER BY parts.pn_manufacturer asc  LIMIT 0, 15
+
+Array
+(
+    [page] => 1
+    [rp] => 15
+    [sortname] => parts.pn_manufacturer
+    [sortorder] => asc
+    [query] => ß
+    [qtype] => subsystem
+    [func] => list
+)
+
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_quantity asc  LIMIT 0, 15 
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_quantity desc  LIMIT 0, 15 
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
+SELECT	items.id AS items_id,
+					items.location AS items_location,
+					items.sn AS items_sn,
+					COUNT(DISTINCT items.id) AS items_quantity,
+					parts.description AS parts_name,
+					simulators.name AS simulators_name,
+					owners.name AS owners_name,
+					places.name AS places_name,
+					manufacturers.name AS manufacturer_name,
+					suppliers.name AS supplier_name,
+					parts.pn_supplier AS parts_pn_supplier,
+					parts.pn_manufacturer AS parts_pn_manufacturer,
+					SUBSTRING(GROUP_CONCAT( movements_items.to_repair 
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS to_repair,
+					SUBSTRING(GROUP_CONCAT( IF(movements_items.replaced_itemId>0,1,0)
+						ORDER BY movements.insert_date DESC SEPARATOR ''),1,1) AS replaced_itemId
+			FROM items 
+				LEFT JOIN parts ON items.id_parts = parts.id 
+				LEFT JOIN simulators ON parts.id_simulators = simulators.id 
+				LEFT JOIN owners ON items.id_owners = owners.id 
+				LEFT JOIN places ON items.id_places = places.id 
+				LEFT JOIN places AS manufacturers ON parts.id_manufacturers = manufacturers.id 
+				LEFT JOIN places AS suppliers ON parts.id_suppliers = suppliers.id 
+				LEFT JOIN movements_items ON items.id = movements_items.id_items
+				LEFT JOIN movements ON movements.id = movements_items.id_movements 
+		 WHERE 1 AND parts.id_simulators='1' GROUP BY places_name, items_sn,
+					owners_name,items_location,parts_name,
+					parts_pn_manufacturer,parts_pn_supplier 
+		 HAVING 1 
+			ORDER BY items_location asc  LIMIT 0, 15 
+
+
+
