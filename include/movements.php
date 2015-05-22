@@ -571,11 +571,13 @@ elseif($func=='list')
 	while($row=mysqli_fetch_assoc($result))
 	{
 		if($id!=$row["id"])
+		{
 			$conta=0;
+			$id=$row["id"];
+			$pnsn[$id]=array("pn"=>"","desc"=>"","sn"=>"","qty"=>"");
+		}
 		else
 			$conta++;
-		$id=$row["id"];
-		$pnsn[$id]=array("pn"=>"","desc"=>"","sn"=>"","qty"=>"");
 		if($conta<5)
 		{
 			$pnsn[$id]["pn"].=$row["pn"]."<br>";
