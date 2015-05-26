@@ -1,7 +1,7 @@
 <?php
 $myhost='localhost';
-$myuser='envysoft';
+$myuser='hightecs_envy';
 $mypass='minair';
-$mydb='warehouse';
-$mydb_tspm='tspm';
+$mydb='hightecs_warehouse';
+$mydb_tspm='hightecs_tspm';
 ?>
